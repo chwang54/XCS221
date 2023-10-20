@@ -70,16 +70,28 @@ class VowelInsertionProblem(util.SearchProblem):
     def startState(self):
         pass
         # ### START CODE HERE ###
+        return (0, "-BEGIN-")
         # ### END CODE HERE ###
 
     def isEnd(self, state) -> bool:
         pass
         # ### START CODE HERE ###
+        return state[0] == len(self.queryWords)
         # ### END CODE HERE ###
 
     def succAndCost(self, state):
         pass
         # ### START CODE HERE ###
+        word_index, last_filled_word = state
+        successors = []
+
+        next_word = self.queryWords[word_index]
+        fills = self.possibleFills(next_word)
+        for fill in fills:
+            next_state = (word_index+1,fill)
+            cost = self.bigramCost(last_filled_word,fill)
+            successors.append((fill,next_state,cost))
+        return successors
         # ### END CODE HERE ###
 
 
@@ -90,6 +102,11 @@ def insertVowels(
 ) -> str:
     pass
     # ### START CODE HERE ###
+    problem = VowelInsertionProblem(queryWords,bigramCost,possibleFills)
+    ucs=util.UniformCostSearch()
+    ucs.solve(problem)
+
+    return ' '.join(ucs.actions) if ucs.actions else None
     # ### END CODE HERE ###
 
 
