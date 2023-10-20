@@ -16,16 +16,24 @@ class SegmentationProblem(util.SearchProblem):
     def startState(self):
         pass
         # ### START CODE HERE ###
+        return 0
         # ### END CODE HERE ###
 
     def isEnd(self, state) -> bool:
         pass
         # ### START CODE HERE ###
+        return state == len(self.query)
         # ### END CODE HERE ###
 
     def succAndCost(self, state):
         pass
         # ### START CODE HERE ###
+        successors = []
+        for end in range(state+1,len(self.query)+1):
+            next_word = self.query[state:end]
+            cost = self.unigramCost(next_word)
+            successors.append((next_word,end,cost))
+        return successors
         # ### END CODE HERE ###
 
 
@@ -37,6 +45,10 @@ def segmentWords(query: str, unigramCost: Callable[[str], float]) -> str:
     ucs.solve(SegmentationProblem(query, unigramCost))
 
     # ### START CODE HERE ###
+    if ucs.totalCost is None:
+        return ""
+    
+    return ' '.join(ucs.actions)
     # ### END CODE HERE ###
 
 
