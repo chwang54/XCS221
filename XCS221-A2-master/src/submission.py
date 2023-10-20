@@ -128,16 +128,29 @@ class JointSegmentationInsertionProblem(util.SearchProblem):
     def startState(self):
         pass
         # ### START CODE HERE ###
+        return (0, "-BEGIN-")
         # ### END CODE HERE ###
 
     def isEnd(self, state) -> bool:
         pass
         # ### START CODE HERE ###
+        return state[0] == len(self.query)
         # ### END CODE HERE ###
 
     def succAndCost(self, state):
         pass
         # ### START CODE HERE ###
+        index, last_word = state
+        successors = []
+
+        for end_index in range(index + 1,len(self.query) + 1):
+            next_word = self.query[index:end_index]
+            fills = self.possibleFills(next_word)
+            for fill in fills:
+                next_state = (end_index,fill)
+                cost = self.bigramCost(last_word,fill)
+                successors.append((fill,next_state,cost))
+        return successors
         # ### END CODE HERE ###
 
 
@@ -150,6 +163,11 @@ def segmentAndInsert(
         return ""
 
     # ### START CODE HERE ###
+    problem = JointSegmentationInsertionProblem(query,bigramCost,possibleFills)
+    ucs=util.UniformCostSearch()
+    ucs.solve(problem)
+
+    return ' '.join(action for action in ucs.actions)
     # ### END CODE HERE ###
 
 
