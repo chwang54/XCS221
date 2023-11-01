@@ -32,8 +32,122 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
 
 % <SCPD_SUBMISSION_TAG>_1a
 \begin{answer}
-  % ### START CODE HERE ###
-  % ### END CODE HERE ###
+  
+  \section*{Initialization (Iteration 0)}
+  
+  \begin{itemize}
+      \item $V(-2) = 0$ (Terminal State)
+      \item $V(-1) = 0$
+      \item $V(0) = 0$
+      \item $V(1) = 0$
+      \item $V(2) = 0$ (Terminal State)
+  \end{itemize}
+  
+  \section*{Iteration 1}
+  
+  Using the Bellman equation for value iteration, $V(s)$ values are calculated as:
+  
+  For state $-1$:
+  \[
+  V(-1) = \max\left(0.2 \times (-5 + 0) + 0.8 \times (20 + 0), 0.3 \times (-5 + 0) + 0.7 \times (20 + 0)\right)
+  \]
+  \[
+  V(-1) = \max(16, 13.5)
+  \]
+  \[
+  V(-1) = 16
+  \]
+  
+  For state $0$:
+  \[
+  V(0) = \max\left(0.2 \times (-5 + 0) + 0.8 \times (-5 + 0), 0.3 \times (-5 + 0) + 0.7 \times (-5 + 0)\right)
+  \]
+  \[
+  V(0) = \max(-5, -5)
+  \]
+  \[
+  V(0) = -5
+  \]
+  
+  For state $1$:
+  \[
+  V(1) = \max\left(0.2 \times (100 + 0) + 0.8 \times (-5 + 0), 0.3 \times (100 + 0) + 0.7 \times (-5 + 0)\right)
+  \]
+  \[
+  V(1) = \max(16, 26.5)
+  \]
+  \[
+  V(1) = 26.5
+  \]
+  
+  \section*{Iteration 2}
+  
+  For state $-1$:
+  \[
+  V(-1) = \max\left(0.2 \times (-5 + -5) + 0.8 \times (20 + 0), 0.3 \times (-5 + -5) + 0.7 \times (20 + 0)\right)
+  \]
+  \[
+  V(-1) = \max(14, 11)
+  \]
+  \[
+  V(-1) = 14
+  \]
+  
+  For state $0$:
+  \[
+  V(0) = \max\left(0.2 \times (-5 + 26.5) + 0.8 \times (-5 + 16), 0.3 \times (-5 + 26.5) + 0.7 \times (-5 + 16)\right)
+  \]
+  \[
+  V(0) = \max(13.1, 14.15)
+  \]
+  \[
+  V(0) = 14.15
+  \]
+  
+  For state $1$:
+  \[
+  V(1) = \max\left(0.2 \times (100 + 0) + 0.8 \times (-5 + -5), 0.3 \times (100 + 0) + 0.7 \times (-5 + -5)\right)
+  \]
+  \[
+  V(1) = \max(12, 23)
+  \]
+  \[
+  V(1) = 23
+  \]
+  
+  \section*{Summary}
+  
+  \textbf{After Iteration 0:}
+  
+  \begin{itemize}
+      \item $V(-2) = 0$
+      \item $V(-1) = 0$
+      \item $V(0) = 0$
+      \item $V(1) = 0$
+      \item $V(2) = 0$
+  \end{itemize}
+  
+  \textbf{After Iteration 1:}
+  
+  \begin{itemize}
+      \item $V(-2) = 0$
+      \item $V(-1) = 16$
+      \item $V(0) = -5$
+      \item $V(1) = 26.5$
+      \item $V(2) = 0$
+  \end{itemize}
+  
+  \textbf{After Iteration 2:}
+  
+  \begin{itemize}
+      \item $V(-2) = 0$
+      \item $V(-1) = 14$
+      \item $V(0) = 14.15$
+      \item $V(1) = 23$
+      \item $V(2) = 0$
+  \end{itemize}
+  
+  
 \end{answer}
 % <SCPD_SUBMISSION_TAG>_1a
 \clearpage
@@ -45,6 +159,11 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
 % <SCPD_SUBMISSION_TAG>_1b
 \begin{answer}
   % ### START CODE HERE ###
+  \begin{itemize}
+    \item $S(-1)$: the best policy is take $A(-1)$, which will have $V_{\text{opt}}(-1) = 14$
+    \item $S(0)$: the best policy is take $A(1)$, which will have $V_{\text{opt}}(0) = 14.15$
+    \item $S(1)$: the best policy is take $A(1)$, which will have $V_{\text{opt}}(0) = 23$
+\end{itemize}
   % ### END CODE HERE ###
 \end{answer}
 % <SCPD_SUBMISSION_TAG>_1b

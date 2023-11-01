@@ -70,7 +70,7 @@ class VowelInsertionProblem(util.SearchProblem):
     def startState(self):
         pass
         # ### START CODE HERE ###
-        return (0, "-BEGIN-")
+        return (0, wordsegUtil.SENTENCE_BEGIN)
         # ### END CODE HERE ###
 
     def isEnd(self, state) -> bool:
@@ -87,6 +87,9 @@ class VowelInsertionProblem(util.SearchProblem):
 
         next_word = self.queryWords[word_index]
         fills = self.possibleFills(next_word)
+        if not fills:
+            fills = {next_word}
+        
         for fill in fills:
             next_state = (word_index+1,fill)
             cost = self.bigramCost(last_filled_word,fill)
@@ -103,10 +106,10 @@ def insertVowels(
     pass
     # ### START CODE HERE ###
     problem = VowelInsertionProblem(queryWords,bigramCost,possibleFills)
-    ucs=util.UniformCostSearch()
+    ucs=util.UniformCostSearch(verbose=0)
     ucs.solve(problem)
 
-    return ' '.join(ucs.actions) if ucs.actions else None
+    return ' '.join(ucs.actions) if ucs.actions else ' '.join(queryWords)
     # ### END CODE HERE ###
 
 
@@ -128,7 +131,7 @@ class JointSegmentationInsertionProblem(util.SearchProblem):
     def startState(self):
         pass
         # ### START CODE HERE ###
-        return (0, "-BEGIN-")
+        return (0, wordsegUtil.SENTENCE_BEGIN)
         # ### END CODE HERE ###
 
     def isEnd(self, state) -> bool:
@@ -172,6 +175,7 @@ def segmentAndInsert(
 
 
 ############################################################
+
 
 if __name__ == "__main__":
     shell.main()
