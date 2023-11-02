@@ -176,6 +176,19 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
 % <SCPD_SUBMISSION_TAG>_2a
 \begin{answer}
   % ### START CODE HERE ###
+  Extend the state space by adding an artificial terminal state S(term)
+
+  Redifine the transition actions
+  \begin{itemize}
+    \item for the artificial state S(term), define its transition probabilities to be $1-\lambda$ 
+    \item for the original states, update its transition probabilities $T'(s,a,s')=\lambda\times T(s,a,s')$
+  \end{itemize}
+
+  Redifine the rewards
+  \begin{itemize}
+    \item for the artificial state S(term), define its rewards $0$ 
+    \item for the original states, keep its rewards as original rewards
+  \end{itemize}
   % ### END CODE HERE ###
 \end{answer}
 % <SCPD_SUBMISSION_TAG>_2a

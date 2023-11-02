@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1698867345 "c:/Users/wangc/Dropbox/GitHub/XCS221/XCS221-A3-master/tex/submission.tex" "submission.pdf" "submission" 1698867347 0
-  "c:/Users/wangc/Dropbox/GitHub/XCS221/XCS221-A3-master/tex/submission.tex" 1698867344 5378 d35ef14af290c54a01966a5937727f80 ""
+["pdflatex"] 1698932748 "c:/Users/wangc/Dropbox/GitHub/XCS221/XCS221-A3-master/tex/submission.tex" "submission.pdf" "submission" 1698932750 0
+  "c:/Users/wangc/Dropbox/GitHub/XCS221/XCS221-A3-master/tex/submission.tex" 1698932748 5924 a481d4131087e8aeb802b91f3a3b6118 ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1697298300 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1697299706 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1697304068 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -45,6 +45,7 @@
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb" 1697297102 24420 52dbb8e8aa0069a1b987309557f8d303 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb" 1697297102 28902 2f5c04fd2884d1878057baa5aad22765 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1697297102 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1697297102 32716 08e384dc442464e7285e891af9f45947 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb" 1697297102 24287 6b803fa9eb1ddff9112e00519b09dd9e ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb" 1697298301 138258 6525c253f16cededa14c7fd0da7f67b2 ""
   "c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1697302001 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -152,9 +153,9 @@
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697305453 8195350 66d6146d8d47f193a5f3c3f00acc12c4 ""
   "c:/texlive/2023/texmf.cnf" 1697305333 713 e69b156964470283e0530f5060668171 ""
   "macros.tex" 1695960311 6092 a7fde5996d05957dd7efe92fd3083341 ""
-  "submission.aux" 1698867347 591 e20a77dfd9a8e1e48650c3508c7fde5a "pdflatex"
-  "submission.out" 1698867347 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "submission.tex" 1698867344 5378 d35ef14af290c54a01966a5937727f80 ""
+  "submission.aux" 1698932750 591 e20a77dfd9a8e1e48650c3508c7fde5a "pdflatex"
+  "submission.out" 1698932750 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "submission.tex" 1698932748 5924 a481d4131087e8aeb802b91f3a3b6118 ""
   (generated)
   "submission.aux"
   "submission.log"
