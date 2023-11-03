@@ -50,6 +50,49 @@ class BlackjackMDP(util.MDP):
     def succAndProbReward(self, state, action):
         pass
         # ### START CODE HERE ###
+        totalCardValueInHand , nextCardIndexIfPeeked , deckCardCounts = state
+
+        if deckCardCounts is None:
+            return []
+        
+        # successors has (newState, prob, reward)
+        successors = []
+        
+        if action == 'Take':
+            if nextCardIndexIfPeeked is not None:
+                newTotalCardValue = totalCardValueInHand + self.cardValues[nextCardIndexIfPeeked]
+                newDeckCardCounts = list(deckCardCounts)
+                newDeckCardCounts[nextCardIndexIfPeeked] -= 1
+
+                if newTotalCardValue > self.threshold:
+                    successors.append(((newTotalCardValue, None, None), 1, 0))
+                elif sum(newDeckCardCounts) == 0:    
+                    successors.append(((newTotalCardValue, None, None), 1, newTotalCardValue))
+                else: 
+                    successors.append(((newTotalCardValue, None, tuple(newDeckCardCounts)), 1, 0))
+            else:
+                for i,count in enumerate(deckCardCounts):
+                    if count > 0:
+                        newTotalCardValue = totalCardValueInHand + self.cardValues[i]
+                        newDeckCardCounts = list(deckCardCounts)
+                        newDeckCardCounts[i] -= 1
+
+                        if newTotalCardValue > self.threshold:
+                            successors.append(((newTotalCardValue, None, None), count/sum(deckCardCounts), 0))
+                        elif sum(newDeckCardCounts) == 0:
+                            successors.append(((newTotalCardValue, None, None), count/sum(deckCardCounts), newTotalCardValue))
+                        else:
+                            successors.append(((newTotalCardValue, None, tuple(newDeckCardCounts)), count/sum(deckCardCounts), 0))
+        elif action == 'Peek':
+            if nextCardIndexIfPeeked is None:
+                for i, count in enumerate(deckCardCounts):
+                    if count > 0:
+                        successors.append(((totalCardValueInHand, i, deckCardCounts), count/sum(deckCardCounts), -self.peekCost))
+        elif action == 'Quit':
+            successors.append(((totalCardValueInHand, None, None), 1, totalCardValueInHand))
+
+        return successors
+
         # ### END CODE HERE ###
 
     def discount(self):
