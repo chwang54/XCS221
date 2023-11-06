@@ -199,9 +199,6 @@ def simulate_QL_over_MDP(mdp, featureExtractor,verbose = False):
     # After learning, set explorationProb to 0 to evaluate the learned policy
     rl.explorationProb = 0
 
-    # Run the simulation with the learned policy
-    # QL_policy = util.simulate(mdp, rl, numTrials=10, verbose=False, sort=False)
-
     # Extract the learned policy from Q-learning
     learned_policy = {}
     for state in mdp.states:
