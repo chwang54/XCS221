@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1698932748 "c:/Users/wangc/Dropbox/GitHub/XCS221/XCS221-A3-master/tex/submission.tex" "submission.pdf" "submission" 1698932750 0
-  "c:/Users/wangc/Dropbox/GitHub/XCS221/XCS221-A3-master/tex/submission.tex" 1698932748 5924 a481d4131087e8aeb802b91f3a3b6118 ""
+["pdflatex"] 1699288512 "c:/Users/wangc/Dropbox/GitHub/XCS221/XCS221-A3-master/tex/submission.tex" "submission.pdf" "submission" 1699288514 0
+  "c:/Users/wangc/Dropbox/GitHub/XCS221/XCS221-A3-master/tex/submission.tex" 1699288511 6671 51be64cab6068afbfe9ff214e6ea47fb ""
   "c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1697298300 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1697299706 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1697304068 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -153,9 +153,9 @@
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1697305453 8195350 66d6146d8d47f193a5f3c3f00acc12c4 ""
   "c:/texlive/2023/texmf.cnf" 1697305333 713 e69b156964470283e0530f5060668171 ""
   "macros.tex" 1695960311 6092 a7fde5996d05957dd7efe92fd3083341 ""
-  "submission.aux" 1698932750 591 e20a77dfd9a8e1e48650c3508c7fde5a "pdflatex"
-  "submission.out" 1698932750 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "submission.tex" 1698932748 5924 a481d4131087e8aeb802b91f3a3b6118 ""
+  "submission.aux" 1699288514 591 e20a77dfd9a8e1e48650c3508c7fde5a "pdflatex"
+  "submission.out" 1699288513 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "submission.tex" 1699288511 6671 51be64cab6068afbfe9ff214e6ea47fb ""
   (generated)
   "submission.aux"
   "submission.log"

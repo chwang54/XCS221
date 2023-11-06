@@ -201,6 +201,20 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
 % <SCPD_SUBMISSION_TAG>_4b
 \begin{answer}
   % ### START CODE HERE ###
+  Comparing Q-learning and Value Iteration for smallMDP:
+
+  \begin{itemize}
+    \item With state (1, 1, (1, 2)): Differing actions between VI (Take) and QL (Quit)
+    \item With state (5, 1, (2, 1)): Differing actions between VI (Take) and QL (Quit)
+    \item With state (6, 0, (1, 1)): Differing actions between VI (Take) and QL (Quit)
+  \end{itemize}
+
+  Differing actions between VI and QL: 3
+
+
+  Comparing Q-learning and Value Iteration for largeMDP:
+
+  Differing actions between VI and QL: 880
   % ### END CODE HERE ###
 \end{answer}
 % <SCPD_SUBMISSION_TAG>_4b
@@ -213,6 +227,10 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
 % <SCPD_SUBMISSION_TAG>_4d
 \begin{answer}
   % ### START CODE HERE ###
+  Comparing Q-learning and Value Iteration for newThresholdMDP:
+  ValueIteration: 5 iterations
+  The expected reward from simulating the original policy on the newThresholdMDP is: 6.868
+  The expected reward under the new Q-learning policy is: 12.0
   % ### END CODE HERE ###
 \end{answer}
 % <SCPD_SUBMISSION_TAG>_4d
