@@ -1,0 +1,12 @@
+\item \points{1b}
+You might notice that our search algorithm explores quite a large number of
+states even for the $8\times 8$ board. Let's see if we can do better. One
+heuristic we discussed in class is using most constrained variable (MCV): To
+choose an unassigned variable, pick the $X_j$ that has the fewest number of
+values $a$ which are consistent with the current partial assignment ($a$ for
+which |get_delta_weight()| on $X_j=a$ returns a non-zero value).
+
+Implement this heuristic in |get_unassigned_variable()| under the condition
+|self.mcv = True|. It should take you exactly 1361 operations to find all
+optimal assignments for 8 queens CSP --- that's 30\% fewer!
+
