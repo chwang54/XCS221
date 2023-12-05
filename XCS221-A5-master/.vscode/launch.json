@@ -10,8 +10,8 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["-p", "ExpectimaxAgent", "-a", "depth=3","-l", "trappedClassic"],
-            "justMyCode": true
+            "justMyCode": true,
+            "args":["2b-0-basic"]
         }
     ]
 }

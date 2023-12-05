@@ -179,7 +179,7 @@ class MinimaxAgent(MultiAgentSearchAgent):
         if nextAgent == gameState.getNumAgents():
           nextAgent = 0
           depth += 1
-      return min(minimax(nextAgent, depth, gameState.generateSuccessor(agentIndex, action)) for action in gameState.getLegalActions(agentIndex))
+        return min(minimax(nextAgent, depth, gameState.generateSuccessor(agentIndex, action)) for action in gameState.getLegalActions(agentIndex))
 
     # Start of minimax
     bestScore = float("-inf")
@@ -210,7 +210,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
     # ### START CODE HERE ###
     def alphaBeta(agentIndex, depth, gameState, alpha, beta):
       if gameState.isWin() or gameState.isLose() or depth == self.depth:
-        return self.evaluationFunction(gameState)
+        return self.evaluationFunction(gameState), None
         
       if agentIndex == 0:  # Pac-Man, Maximizer
         return maxValue(agentIndex, depth, gameState,alpha, beta)
@@ -222,7 +222,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
       bestAction = None
       for action in gameState.getLegalActions(agentIndex):
         successorState = gameState.generateSuccessor(agentIndex, action)
-        successorValue = alphaBeta((agentIndex + 1) % gameState.getNumAgents(), depth + 1, successorState, alpha, beta)
+        successorValue = alphaBeta((agentIndex + 1) % gameState.getNumAgents(), depth + 1, successorState, alpha, beta)[0]
         if successorValue > v:
           v,bestAction = successorValue, action
         if v > beta:
@@ -235,7 +235,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
       bestAction = None
       for action in gameState.getLegalActions(agentIndex):
         successorState = gameState.generateSuccessor(agentIndex, action)
-        successorValue = alphaBeta((agentIndex + 1) % gameState.getNumAgents(), depth + 1, successorState, alpha, beta)
+        successorValue = alphaBeta((agentIndex + 1) % gameState.getNumAgents(), depth + 1, successorState, alpha, beta)[0]
         if successorValue < v:
           v,bestAction = successorValue, action
         if v < alpha:
@@ -244,7 +244,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
       return v,bestAction
   
     # Initial call to alpha-beta
-    score, action = alphaBeta(0, 0, gameState, float("-inf"), float("inf"))
+    _, action = alphaBeta(0, 0, gameState, float("-inf"), float("inf"))
     return action
     # ### END CODE HERE ###
 
@@ -265,16 +265,29 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
     """
     pass
     # ### START CODE HERE ###
+    def expectimax(agentIndex, depth, gameState):
+      if gameState.isWin() or gameState.isLose() or depth == self.depth:
+        return self.evaluationFunction(gameState)
+      if agentIndex == 0:  # Pac-Man, Maximizer
+        return max(expectimax(1, depth + 1, gameState.generateSuccessor(agentIndex, action)) for action in gameState.getLegalActions(agentIndex))
+      else:  # Ghosts, Expected Value
+        nextAgent = agentIndex + 1
+        if nextAgent >= gameState.getNumAgents():
+          nextAgent = 0
+          depth += 1
+        actions = gameState.getLegalActions(agentIndex)
+        return sum(expectimax(nextAgent, depth, gameState.generateSuccessor(agentIndex, action)) for action in actions) / len(actions)
 
+    # Start of expectimax
+    bestScore = float("-inf")
+    bestAction = Directions.STOP
+    for action in gameState.getLegalActions(0):
+      score = expectimax(1, 1, gameState.generateSuccessor(0, action))
+      if score > bestScore:
+        bestScore = score
+        bestAction = action
 
-
-
-    # Begin your code
-
-    # Initial call to the maxValue function from the root Pac-Man agent (agentIndex = 0)
-    # with initial alpha and beta values
-    action = maxValue(0, 0, gameState, float("-inf"), float("inf"))
-    return action
+    return bestAction
     # ### END CODE HERE ###
 
 ######################################################################################
@@ -285,10 +298,53 @@ def betterEvaluationFunction(currentGameState):
     Your extreme, unstoppable evaluation function (problem 4).
 
     DESCRIPTION: <write something here so we know what you did>
+    This evaluation function takes into account several features:
+    - The score of the game state
+    - The distance to the nearest food dot
+    - The distance to the nearest (non-scared) ghost
+    - The number of capsules left
+    - The number of food dots left
+    - The state of the ghosts (scared or not) and their proximity
   """
   pass
-  # ### START CODE HERE ###
-  # ### END CODE HERE ###
+  ### START CODE HERE ###
+  # Useful information you can extract from a GameState (pacman.py)
+  newPos = currentGameState.getPacmanPosition()
+  newFood = currentGameState.getFood()
+  newGhostStates = currentGameState.getGhostStates()
+  newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
+
+  score = currentGameState.getScore()
+
+  # Compute distance to the nearest food
+  foodList = newFood.asList()
+  minFoodDistance = min([util.manhattanDistance(newPos, food) for food in foodList]) if foodList else 1
+
+  # Compute distance to ghosts and handle division by zero
+  ghostDistances = [util.manhattanDistance(newPos, ghostState.getPosition()) for ghostState in newGhostStates]
+  # Avoid division by zero by adding a small amount to the distance
+  minGhostDistance = min(ghostDistances) if ghostDistances else 10
+  ghostScore = sum((2 + scaredTime) / (distance + 0.1) for scaredTime, distance in zip(newScaredTimes, ghostDistances))
+
+  # Number of capsules left
+  numCapsulesLeft = len(currentGameState.getCapsules())
+
+  # Encourage eating food by giving a positive score for being close to food
+  foodScore = 1 / float(minFoodDistance) if minFoodDistance > 0 else 100
+
+  # Encourage eating capsules by giving a higher score if fewer capsules are left
+  capsuleScore = -3 * numCapsulesLeft
+
+  # Encourage eating scared ghosts
+  scaredGhostScore = ghostScore if minGhostDistance > 1 else -200
+
+  # Features and weights
+  features = [score, foodScore, scaredGhostScore, capsuleScore]
+  weights = [1, 5, 2, 10]
+
+  # Combine features with weights
+  return sum(feature * weight for feature, weight in zip(features, weights))
+### END CODE HERE ###
 
 # Abbreviation
 better = betterEvaluationFunction
