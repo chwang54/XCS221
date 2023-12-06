@@ -321,11 +321,18 @@ def get_sum_variable(csp, name, variables, maxSum):
     """
     pass
     # ### START CODE HERE ###
+    
 
     aux_domain = [(n0, n0+xi) for n0 in range(maxSum + 1) for xi in range(maxSum + 1) if n0+xi<=maxSum]
 
     A_variables = []  # To keep track of the auxiliary variables
-
+    if len(variables) == 0:
+        A_var = 'sum_{}_{}'.format(name, 1)
+        A_variables.append(A_var)
+        csp.add_variable(A_var, [0])
+        # def first_aux_factor(A_val):
+        #     return A_val[0] == 0
+        # csp.add_unary_factor(A_var, first_aux_factor)
     # Add auxiliary variables
     for i, X_var in enumerate(variables):
         A_var = 'sum_{}_{}'.format(name, i + 1)
@@ -358,6 +365,7 @@ def get_sum_variable(csp, name, variables, maxSum):
             def last_aux_factor(A_prev_val, A_val):
                 return A_prev_val[1] == A_val
             csp.add_binary_factor(A_variables[i], A_var, last_aux_factor)
+    if len(A_variables) == 0: return 
     return A_variables[-1]
     # ### END CODE HERE ###
 
@@ -541,6 +549,7 @@ class SchedulingCSPConstructor():
             unit_vars = []
 
             for request in self.profile.requests:
+                request_var = (request, quarter)
                 for course_id in request.cids:
                     # Create a variable for each course and quarter
                     # The domain includes 0 (course not taken) and the range of possible units
@@ -548,9 +557,17 @@ class SchedulingCSPConstructor():
                     course_units = self.bulletin.courses[course_id]  # Assuming this gives a range of units
                     domain = [0] + list(range(course_units.minUnits, course_units.maxUnits + 1))
                     csp.add_variable(course_var, domain)
-
                     unit_vars.append(course_var)
+                # Define a binary factor function
+                    def binary_factor(req_val, course_units):
+                        if req_val == course_id:
+                            return course_units != 0  # If the course is selected, units must be non-zero
+                        else:
+                            return course_units == 0  # If the course is not selected, units must be zero
+                    # Add binary factor to the CSP
+                    csp.add_binary_factor(request_var, course_var, binary_factor)
 
+                    
             # Use get_sum_variable to create a sum variable for this quarter
             sum_var = get_sum_variable(csp, f"sum_units_{quarter}", unit_vars, self.profile.maxUnits)
 
@@ -558,6 +575,8 @@ class SchedulingCSPConstructor():
             min_units = self.profile.minUnits
             max_units = self.profile.maxUnits
             csp.add_unary_factor(sum_var, lambda units: min_units <= units <= max_units)
+
+            
         # ### END CODE HERE ###
 
     def add_all_additional_constraints(self, csp):

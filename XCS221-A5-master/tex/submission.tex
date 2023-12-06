@@ -33,6 +33,20 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
 % <SCPD_SUBMISSION_TAG>_0a
 \begin{answer}
   % ### START CODE HERE ###
+1. Variables:
+    
+ Button Variables: `B1, B2, ..., Bm`, each representing a button. The domain of each button variable is `{0, 1}`, where `0` represents not pressing the button and `1` represents pressing the button.
+ Light Bulb Variables: `L1, L2, ..., Ln`, each representing a light bulb. The domain of each light bulb variable is `{0, 1}`, where `0` means off and `1` means on. Initially, all light bulb variables are set to `0` (off).
+
+2. Constraints:
+    
+Each light bulb `Li` has a constraint that depends on its initial state (which is `0` for all bulbs) and the states of the buttons that control it. If `Ti` is the subset of buttons controlling light bulb `i`, then the constraint for light bulb `i` is a function such that `Li` equals the XOR of its initial state with the states of the buttons in `Ti`.
+This can be expressed as $Li = \text{initial\_state\_i} \oplus (\text{Bj1} \oplus \text{Bj2} \oplus \ldots \text{Bjx})$ for all $j1, j2, \ldots, jx$ in $Ti$.
+
+
+3. Goal:
+    
+The goal of the CSP is to find values for the variables `B1` to `Bm` and `L1` to `Ln` such that all the constraints are satisfied, which in this case means all `Ln` variables are set to `1` (all light bulbs are on).
   % ### END CODE HERE ###
 \end{answer}
 % <SCPD_SUBMISSION_TAG>_0a
@@ -45,6 +59,48 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
 % <SCPD_SUBMISSION_TAG>_0b
 \begin{answer}
   % ### START CODE HERE ###
+\section{i}
+To determine the number of consistent assignments for the CSP with three variables $X_1, X_2, X_3$ and two XOR constraints $t_1(X) = X_1 \oplus X_2$ and $t_2(X) = X_2 \oplus X_3$, we need to check each possible combination of values for $X_1, X_2,$ and $X_3$ and count those that satisfy both $t_1$ and $t_2$.
+
+The XOR operation yields true (or 1) if and only if the inputs are different. So, for each constraint to be satisfied:
+- $t_1(X) = X_1 \oplus X_2$ should be 1, meaning $X_1$ and $X_2$ must be different.
+- $t_2(X) = X_2 \oplus X_3$ should be 1, meaning $X_2$ and $X_3$ must be different.
+
+Now, let's enumerate the possibilities:
+1. $X_1 = 0, X_2 = 0, X_3 = 0 \Rightarrow t_1 = 0 \oplus 0 = 0$, $t_2 = 0 \oplus 0 = 0$ (Inconsistent)
+2. $X_1 = 0, X_2 = 0, X_3 = 1 \Rightarrow t_1 = 0 \oplus 0 = 0$, $t_2 = 0 \oplus 1 = 1$ (Inconsistent)
+3. $X_1 = 0, X_2 = 1, X_3 = 0 \Rightarrow t_1 = 0 \oplus 1 = 1$, $t_2 = 1 \oplus 0 = 1$ (Consistent)
+4. $X_1 = 0, X_2 = 1, X_3 = 1 \Rightarrow t_1 = 0 \oplus 1 = 1$, $t_2 = 1 \oplus 1 = 0$ (Inconsistent)
+5. $X_1 = 1, X_2 = 0, X_3 = 0 \Rightarrow t_1 = 1 \oplus 0 = 1$, $t_2 = 0 \oplus 0 = 0$ (Inconsistent)
+6. $X_1 = 1, X_2 = 0, X_3 = 1 \Rightarrow t_1 = 1 \oplus 0 = 1$, $t_2 = 0 \oplus 1 = 1$ (Consistent)
+7. $X_1 = 1, X_2 = 1, X_3 = 0 \Rightarrow t_1 = 1 \oplus 1 = 0$, $t_2 = 1 \oplus 0 = 1$ (Inconsistent)
+8. $X_1 = 1, X_2 = 1, X_3 = 1 \Rightarrow t_1 = 1 \oplus 1 = 0$, $t_2 = 1 \oplus 1 = 0$ (Inconsistent)
+
+Among these 8 possible assignments, only 2 are consistent (satisfying both constraints). Therefore, there are 2 consistent assignments for this CSP.
+
+
+\section{ii}
+
+1 initial call
+
+2 calls to assign $X_1$
+
+4 calls to assign $X_3$ (2 for each value of $X_1$)
+
+8 calls to assign $X_2$ (2 for each combination of $X_1$ and $X_3$)
+
+This totals to 15 calls to `backtrack`.
+
+\section{iii}
+1 initial call
+
+2 calls to assign $X_1$
+
+2 calls to assign $X_3$ (1 for each value of $X_1$)
+
+2 calls to assign $X_2$ (1 for each combination of $X_1$ and $X_3$)
+
+This totals to 7 calls to `backtrack`.
   % ### END CODE HERE ###
 \end{answer}
 % <SCPD_SUBMISSION_TAG>_0b
@@ -57,7 +113,69 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
 % <SCPD_SUBMISSION_TAG>_2d
 \begin{answer}
   % ### START CODE HERE ###
-  % ### END CODE HERE ###
+\# Unit limit per quarter.
+
+minUnits 4
+
+maxUnits 6
+
+\# These are the quarters that I need to fill. It is assumed that
+
+\# the quarters are sorted in chronological order.
+
+register Win2017
+
+register Spr2018
+
+\# Courses I've already taken
+
+taken CS103
+
+taken CS106B
+
+taken CS107
+
+taken CS109
+
+taken CS140
+
+taken CS161
+
+taken CS221
+
+taken MATH51
+
+taken CS145
+
+taken CS124
+
+\# Courses that I'm requesting
+
+request CS224M
+
+request CS224S  
+
+request CS227B   
+
+request CS229A   
+
+request CS232   
+
+request CS244E   
+
+Best schedule 
+
+Here's the best schedule:
+
+Quarter         Units   Course
+
+  Win2017       4       CS229A
+
+  Spr2018       3       CS227B
+
+  Spr2018       3       CS232
+
+ % ### END CODE HERE ###
 \end{answer}
 % <SCPD_SUBMISSION_TAG>_2d
 \clearpage
@@ -69,6 +187,7 @@ instructions to regenerate this handout with your typeset \LaTeX{} solutions.
 % <SCPD_SUBMISSION_TAG>_3a
 \begin{answer}
   % ### START CODE HERE ###
+In addressing the unsatisfiable constraints in the hospital's residency scheduling, I would advocate for changing factor B, the work to be performed by residents as opposed to other staff. By redistributing some responsibilities to other staff members, the hospital can alleviate the workload on residents, making it more feasible to meet the constraints for rest and working hours. This approach prioritizes the well-being of residents, which is crucial for both their health and the quality of care they provide to patients. It also addresses the root cause of the problem - an excessive workload - rather than merely adjusting the constraints around an unsustainable work schedule.
   % ### END CODE HERE ###
 \end{answer}
 % <SCPD_SUBMISSION_TAG>_3a
